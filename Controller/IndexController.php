@@ -2,25 +2,22 @@
 
 namespace Pumukit\Geant\WebTVBundle\Controller;
 
-use Pumukit\SchemaBundle\Document\MultimediaObject;
-use Pumukit\SchemaBundle\Document\Series;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Pumukit\SchemaBundle\Document\MultimediaObject;
+use Pumukit\WebTVBundle\Controller\IndexController as ParentController;
 
-class AnnouncesController extends Controller
+class IndexController extends ParentController
 {
     /**
-     * @Route("/latestuploads", name="pumukit_webtv_announces_latestuploads")
      * @Template()
      */
-    public function latestUploadsAction(Request $request)
+    public function recentlyaddedAction()
     {
-        $limit = 20;
-        $templateTitle = $this->container->getParameter('menu.announces_title');
+        $limit = $this->container->getParameter('limit_objs_recentlyadded');
         $numberCols = $this->container->getParameter('columns_objs_announces');
+        $templateTitle = $this->container->getParameter('menu.announces_title');
 
         $this->get('pumukit_web_tv.breadcrumbs')->addList($templateTitle, 'pumukit_webtv_announces_latestuploads');
 
